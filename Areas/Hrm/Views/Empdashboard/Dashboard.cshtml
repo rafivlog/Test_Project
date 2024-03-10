@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+            padding: 15px;
+            gap: 10px;
+        }
+
+        .large-button {
+            display: inline-block;
+            padding: 20px 40px; /* Increase padding for a larger button */
+            font-size: 20px; /* Increase font size for a larger button */
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border: 2px solid #3498db; /* Border color */
+            background-color: #3498db; /* Background color */
+            color: #fff; /* Text color */
+            border-radius: 8px; /* Rounded corners */
+            transition: background-color 0.3s, color 0.3s; /* Smooth transition on hover */
+        }
+
+            .large-button:hover {
+                background-color: #2980b9; /* Darker shade for hover effect */
+                border-color: #2980b9;
+            }
+
+        .logout-container {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+        }
+
+        .logout-button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border: 1px solid #d9534f; /* Bootstrap's danger color */
+            background-color: limegreen;
+            color: #fff;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .logout-button:hover {
+                background-color: #c9302c; /* Darker shade for hover effect */
+                border-color: #c9302c;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="large-button" type="button" onclick="emplist()">Employee List</button>
+    <button class="large-button" onclick="leaveentry()" type="button">Leave Entry</button>
+    <button class="large-button" onclick="attendance()" type="button">Attendance</button>
+    <div type="button" class="logout-container">
+        <button type="button" onclick="logout()" class="logout-button">Logout</button>
+    </div>
+
+</body>
+</html>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+<script>
+    function emplist()
+    {
+        window.location.href = '/Hrm/Employee/Show';
+    }
+    function logout()
+    {
+        window.location.href = '/Hrm/Emplogin/Login';
+    }
+    function leaveentry() 
+    {
+        window.location.href = '/Hrm/Leaveentry/Leave';
+    }
+    function attendance() {
+        window.location.href = '/Hrm/Attendance/Attendance';
+    }
+
+</script>

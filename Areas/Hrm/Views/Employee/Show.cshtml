@@ -1,0 +1,77 @@
+﻿
+<style>
+    .large-button {
+        display: inline-block;
+        padding: 20px 20px; /* Increase padding for a larger button */
+        font-size: 15px; /* Increase font size for a larger button */
+        text-decoration: none;
+        cursor: pointer;
+        border: 2px solid #3498db; /* Border color */
+        background-color: #3498db; /* Background color */
+        color: #fff; /* Text color */
+        border-radius: 8px; /* Rounded corners */
+        transition: background-color 0.3s, color 0.3s;
+        position:relative;
+       /*  margin-left:50%;
+        margin-bottom:25px; */
+    }
+</style>
+
+<div>
+    <h1>All Employee List</h1>
+    <button class="large-button" type="button" onclick="backbutton()">Back</button>
+</div>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Sr</th>
+            <th scope="col">Employee Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Join Date</th>
+            <th scope="col">DOB</th>
+            <th scope="col">DepID</th>
+            <th scope="col">DesgID</th>
+            <th scope="col">Salary</th>
+            <th scope="col">Status</th>
+            <th scope="col">Address</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < ViewBag.employee.Count; i++)
+        {
+            <tr>
+                <td style="text-align:center">@(i+1)</td>
+                <td style="text-align:center">@ViewBag.employee[i].empname</td>
+                <td style="text-align:center">@ViewBag.employee[i].email</td>
+                <td style="text-align:center">@ViewBag.employee[i].dtjoin</td>
+                <td style="text-align:center">@ViewBag.employee[i].dtbirth</td>
+                <td style="text-align:center">@ViewBag.employee[i].dept_id</td>
+                <td style="text-align:center">@ViewBag.employee[i].desig_id</td>
+                <td style="text-align:center">@ViewBag.employee[i].salary</td>
+                <td style="text-align:center">
+                    @if (ViewBag.employee[i].emp_status == true)
+                    {
+                        <text>Active</text>
+                    }
+                    else
+                    {
+                       <text>InActive</text>
+                    }
+                </td>
+                <td style="text-align:center">@ViewBag.employee[i].address</td>
+                @* <td style="text-align:center">
+                    <button class="btn btn-primary" onclick="EditClient(@ViewBag.getemployee[i].pk_client_id)">Edit</button>  <button class="btn btn-danger" onclick="deleteClient(@ViewBag.getclient[i].pk_client_id)">Delete</button>
+                </td> *@
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    function backbutton() 
+    {
+        window.location.href = '/Hrm/Empdashboard/Dashboard';
+    }
+</script>

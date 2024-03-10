@@ -1,0 +1,146 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Entry</title>
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .leave-entry-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: #2980b9;
+            }
+
+        .large-button {
+            display: inline-block;
+            padding: 20px 20px;
+            font-size: 15px;
+            text-decoration: none;
+            cursor: pointer;
+            border: 2px solid #3498db;
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 8px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="large-button" type="button" onclick="backbutton()">Back</button>
+
+    <div class="leave-entry-form">
+        <h2>Leave Entry Form</h2>
+        <form>
+            <label for="empname">Employee Name:</label>
+            <input type="text" id="empname" name="empname" required>
+
+            <label for="leavetype">Leave Type:</label>
+            <select id="leavetype" name="leavetype" required>
+                <option value="sick">Sick Leave</option>
+                <option value="vacation">Vacation Leave</option>
+                <option value="personal">Personal Leave</option>
+            </select>
+
+            <label for="leavefrom">Leave From:</label>
+            <input type="date" id="leavefrom" name="leavefrom" required>
+
+            <label for="leaveto">Leave To:</label>
+            <input type="date" id="leaveto" name="leaveto" required>
+
+            <label for="totaldays">Total Days:</label>
+            <input type="number" id="totaldays" name="totaldays" required>
+
+            <label for="remarks">Remarks:</label>
+            <textarea id="remarks" name="remarks" rows="2" required></textarea>
+
+            <button id="savebutton" onclick="leavefunction()" type="button">Submit Leave Entry</button>
+        </form>
+    </div>
+
+</body>
+</html>
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+
+<script>
+
+    function leavefunction() {
+        var formData = new FormData();
+        formData.append('empname', $('#empname').val());
+        formData.append('leavetype', $('#leavetype').val());
+        formData.append('leavefrom', $('#leavefrom').val());
+        formData.append('leaveto', $('#leaveto').val());
+        formData.append('totaldays', $('#totaldays').val());
+        formData.append('remarks', $('#remarks').val());
+
+        $.ajax({
+            type: 'POST',
+            url: '/Hrm/Leaveentry/Save',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                // Handle the success case, e.g., remove the deleted image from the table
+                $('#empname').val('');
+                $('#leavetype').val('');
+                $('#leavefrom').val('');
+                $('#leaveto').val('');
+                $('#totaldays').val('');
+                $('#remarks').val('');
+               
+                //window.location.href = '/Hrm/Employee/Show';
+            },
+            error: function () {
+
+            }
+
+        });
+    }
+
+    function backbutton() {
+        window.location.href = '/Hrm/Empdashboard/Dashboard';
+    }
+</script>

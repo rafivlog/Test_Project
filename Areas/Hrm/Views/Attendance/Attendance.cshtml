@@ -1,0 +1,92 @@
+﻿<h1>Attendance Page</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .attendance-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: #2980b9;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="attendance-form">
+        <h2>Attendance Form</h2>
+        <form>
+            <label for="empid">Employee ID:</label>
+            <input type="text" id="empid" name="empid" required>
+
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="starttime">Start Time:</label>
+            <input type="time" id="starttime" name="starttime" required>
+
+            <label for="endtime">End Time:</label>
+            <input type="time" id="endtime" name="endtime" required>
+
+            <label for="isActive">Is Active:</label>
+            <select id="isActive" name="isActive" required>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+
+            <label for="status">Status:</label>
+            <select id="status" name="status" required>
+                <option value="present">Present</option>
+                <option value="absent">Absent</option>
+                <option value="late">Late</option>
+            </select>
+
+            <label for="remarks">Remarks:</label>
+            <textarea id="remarks" name="remarks" rows="2" required></textarea>
+
+            <button type="submit">Submit Attendance</button>
+        </form>
+    </div>
+
+</body>
+</html>
