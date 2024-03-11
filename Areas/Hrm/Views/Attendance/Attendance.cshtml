@@ -18,7 +18,7 @@
         }
 
         .attendance-form {
-            background-color: #3498db;
+            /* background-color: #3498db; */
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -43,7 +43,7 @@
         }
 
         button {
-            background-color: beige;
+            background-color: #2980b9;
             color: black;
             font-weight: bold;
             padding: 10px 20px;
@@ -53,16 +53,33 @@
         }
 
          button:hover {
-                background-color: #2980b9;
+                background-color: green;
          }
+
+
+           
+
+        .large-button {
+            display: inline-block;
+            padding: 20px 20px;
+            font-size: 15px;
+            text-decoration: none;
+            cursor: pointer;
+            border: 2px solid #3498db;
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 8px;
+            transition: background-color 0.3s, color 0.3s;
+        }
     </style>
 </head>
 <body>
 
+    <button class="large-button" type="button" onclick="backbutton()">Back</button>
     <div class="attendance-form">
-        <h2>Attendance Form</h2>
+        
         <form>
-            <label for="empid">Employee ID:</label>
+            <label for="empid">Designation ID:</label>
             <input type="text" id="empid" name="empid" required>
 
             <label for="name">Name:</label>
@@ -96,3 +113,14 @@
 
 </body>
 </html>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    function backbutton() {
+        window.location.href = '/Hrm/Empdashboard/Dashboard';
+    }
+</script>

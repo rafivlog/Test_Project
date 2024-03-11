@@ -67,6 +67,11 @@
 
 
 <script>
+    $('#password').keypress(function (e) {
+        if (e.which === 13) {
+            loginform();
+        }
+    });
     function loginform() {
         var formData = new FormData();
         
@@ -105,3 +110,14 @@
 
     
 </script>
+
+
+           @*  $('#password').keypress(function (e) {
+
+                if (e.which === 13) { // 13 is the keycode for "Enter"
+
+                    submitForm(); // Call the submitForm function
+
+                }
+
+            }); *@

@@ -5,7 +5,7 @@
     <title>Employee Information Form</title>
     <!-- You can link your custom stylesheets or include additional styling here -->
     <style>
-        body {
+       /*  body {
             font-family: Arial, sans-serif;
             margin: 20px;
         }
@@ -33,6 +33,65 @@
 
         .address {
             width: 30%;
+        } */
+
+
+        /* New Code */
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #3498db;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            position:center;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+                background-color: #4caf50;
+                color: #fff;
+                cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+                    background-color: #45a049;
+        }
+
+        button {
+            background-color: beige;
+            color: black;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        button:hover {
+                background-color: #2980b9;
         }
     </style>
 </head>
@@ -72,7 +131,9 @@
         </select>
 
         <label for="address">Address:</label>
-        <textarea id="address" name="address" rows="4" required></textarea>
+        <textarea id="address" name="address" rows="4" cols="50" required></textarea>
+        </br>
+        </br>
 
         <button type="button" id="savebutton" onclick="SubmitForm()">Submit</button>
 
@@ -134,3 +195,14 @@
         
     }
 </script>
+
+
+@* 1-> git add .
+    2-> git commit -m ""
+    3-> git push
+
+    My Bank Account Number   
+    First Security Islami Bank : 12600002862
+*@
+
+
