@@ -79,11 +79,10 @@
     <div class="attendance-form">
         
         <form>
-            <label for="empid">Designation ID:</label>
-            <input type="text" id="empid" name="empid" required>
-
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
+            <label for="desig_id">Designation ID:</label>
+            <select id="desig_id" name="desig_id">
+                
+            </select>
 
             <label for="starttime">Start Time:</label>
             <input type="time" id="starttime" name="starttime" required>
@@ -91,8 +90,8 @@
             <label for="endtime">End Time:</label>
             <input type="time" id="endtime" name="endtime" required>
 
-            <label for="isActive">Is Active:</label>
-            <select id="isActive" name="isActive" required>
+            <label for="is_active">Is Active:</label>
+            <select id="is_active" name="is_active" required>
                 <option value="yes">Yes</option>
                 <option value="no">No</option>
             </select>
@@ -107,9 +106,10 @@
             <label for="remarks">Remarks:</label>
             <textarea id="remarks" name="remarks" rows="2" required></textarea>
 
-            <button type="submit">Submit Attendance</button>
+            <button type="button">Submit Attendance</button>
         </form>
     </div>
+
 
 </body>
 </html>
@@ -120,7 +120,98 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <script>
-    function backbutton() {
+    $(function () {
+        debugger
+        $.ajax({
+            url: '/Hrm/Employee/GetDropdownData',
+            type: 'GET',
+            
+            success: function (data) {
+                console.log(data);
+                var dropdown = $('#desig_id');// dropdown #ID field name
+                dropdown.empty();
+
+                var  selectoption = $('<option>').text('--select--').val('');
+                dropdown.append(selectoption);
+
+                $.each(data, function (index, group) {
+
+                    var option = $('<option>').text(group.dd_value).val(group.id);
+
+                    dropdown.append(option);// dd_value -> collect to the employee table , using query
+
+                });
+                
+            },
+            
+        });
+    });
+    function backbutton() 
+    {
         window.location.href = '/Hrm/Empdashboard/Dashboard';
     }
 </script>
+
+
+
+@*  ####  DropDown er kaj #####
+    1-> ajax er code 
+    (2 & 3 j table theke anbo data tar controller & repository te kora lagbe)
+    2-> contrller giye kaj j table theke data anbo 
+    3-> repository giye query chalabo
+    4-> Dropdown model create , then specific data ante hbe  query chalay.
+
+    1->>>
+    $(function () {
+        debugger
+        $.ajax({
+            url: '/Hrm/Employee/GetDropdownData',
+            type: 'GET',
+
+            success: function (data) {
+                console.log(data);
+                var dropdown = $('#desig_id');// dropdown #ID field name
+                dropdown.empty();
+
+                var  selectoption = $('<option>').text('--select--').val('');
+                dropdown.append(selectoption);
+
+                $.each(data, function (index, group) {
+
+                    var option = $('<option>').text(group.dd_value).val(group.id);
+
+                    dropdown.append(option);// dd_value -> collect to the employee table , using query
+
+                });
+
+            },
+
+        });
+    });
+
+
+    2->>>
+    [HttpGet]
+        public IActionResult GetDropdownData()
+        {
+
+            IEnumerable<DropDownModel> data = EmployeeRepository.GetDropDownData();
+            return Json(data);
+        }
+
+     3->>>
+      public static IEnumerable<DropDownModel> GetDropDownData()
+        {
+            string query = "SELECT id as id , CONCAT(desig_id , ' | ',empname  ) as dd_value FROM HRM_Employees";
+
+            using (IDbConnection connection  = new SqlConnection(LoadConnectionString()))
+            {
+                return connection .Query<DropDownModel>(query,new DynamicParameters()).ToList();
+            }
+        }
+
+        4->>>
+        public int id { get; set; }
+        public string dd_value { get; set; }
+     
+*@

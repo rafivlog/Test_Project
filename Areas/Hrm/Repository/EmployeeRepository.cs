@@ -2,6 +2,7 @@
 using Microsoft.Data.SqlClient;
 using System.Data;
 using Dapper;
+using static Infiniatask.Areas.Controllers.EmployeeController;
 namespace Infiniatask.Areas.Hrm.Repository
 {
     public class EmployeeRepository : dbcontext
@@ -48,6 +49,19 @@ namespace Infiniatask.Areas.Hrm.Repository
             return con.Query<EmployeeModel>(query, new DynamicParameters()).ToList();
             
 
+        }
+
+
+        //Attendance er jnne dropdown er jnne collect kortci .
+
+        public static IEnumerable<DropDownModel> GetDropDownData()
+        {
+            string query = "SELECT id as id , CONCAT(desig_id , ' | ',empname  ) as dd_value FROM HRM_Employees";
+
+            using (IDbConnection connection  = new SqlConnection(LoadConnectionString()))
+            {
+                return connection .Query<DropDownModel>(query,new DynamicParameters()).ToList();
+            }
         }
 
 

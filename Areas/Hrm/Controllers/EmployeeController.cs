@@ -2,6 +2,7 @@
 using Infiniatask.Areas.Hrm.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.JSInterop.Implementation;
 
 namespace Infiniatask.Areas.Controllers
 {
@@ -37,7 +38,20 @@ namespace Infiniatask.Areas.Controllers
             return View();
         }
 
+        [HttpGet]
+/*        ekhane attendace from er dropdown er jnne employee theke data nicci */        
+        public IActionResult GetDropdownData()
+        {
 
-      
+            IEnumerable<DropDownModel> data = EmployeeRepository.GetDropDownData();
+            return Json(data);
+        }
+
+
+        
+
+
+
+
     }
 }
