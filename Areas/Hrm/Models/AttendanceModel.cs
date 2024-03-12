@@ -2,7 +2,12 @@
 {
     public class AttendanceModel
     {
-        public string empname { get; set; }
+        public string name { get; set; }
         public int desig_id { get; set; }
+        public DateTime starttime { get; set; }
+        public DateTime endtime { get; set; }
+        public int is_active { get; set; }
+        public string status { get; set; }
+        public string remarks { get; set; }
     }
 }

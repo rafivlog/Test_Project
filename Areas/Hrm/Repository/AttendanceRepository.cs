@@ -14,15 +14,28 @@ namespace Infiniatask.Areas.Hrm.Repository
             return Getconnection();
         }
 
-
-
-       /* public async Task<IEnumerable<EmployeeModel>> GetAllEmployeesAsync()
+        public static int Create(AttendanceModel employee)
         {
-            using (IDbConnection dbConnection = dbcontext)
+            string response = string.Empty;
+            string query = "Insert into HRM_Attendance(desig_id,starttime,endtime,is_active,status,remarks) " +
+                "values (@desig_id,@starttime,@endtime,@is_active,@status,@remarks)";
+            using (IDbConnection con = new SqlConnection(LoadConnectionString()))
             {
-                dbConnection.Open();
-                return await dbConnection.QueryAsync<EmployeeModel>("SELECT * FROM Employees");
+                return con.Execute(query, new
+                {
+
+                    employee.desig_id,
+                    employee.starttime,
+                    employee.endtime,
+                    employee.is_active,
+                    employee.status,
+                    employee.remarks
+                });
             }
-        }*/
+
+
+        }
+
+       
     }
 }

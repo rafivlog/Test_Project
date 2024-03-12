@@ -15,15 +15,20 @@ namespace Infiniatask.Areas.Hrm.Controllers
         public IActionResult Attendance()
         {
             return View();
-        } 
+        }
 
-       /* [HttpGet]*/
-        /*public async IActionResult dropdown(AttendanceModel data) 
+        [HttpPost]
+        public IActionResult Save(AttendanceModel data)
         {
-            List<AttendanceModel> employees = (await AttendanceRepository.GetAllEmployeesAsync()).ToList();
-            return View(employees);
 
-        }*/
+            int result;
+            result = AttendanceRepository.Create(data);
+
+
+            return Json(result);
+
+
+        }
 
     }
 }

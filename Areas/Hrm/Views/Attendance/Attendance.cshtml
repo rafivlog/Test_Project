@@ -106,7 +106,7 @@
             <label for="remarks">Remarks:</label>
             <textarea id="remarks" name="remarks" rows="2" required></textarea>
 
-            <button type="button">Submit Attendance</button>
+            <button id="savebutton" onclick="attendancefunction()" type="button">Submit Attendance</button>
         </form>
     </div>
 
@@ -120,6 +120,8 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <script>
+
+    //dropdown work
     $(function () {
         debugger
         $.ajax({
@@ -146,10 +148,49 @@
             
         });
     });
+
+
+    // back button
     function backbutton() 
     {
         window.location.href = '/Hrm/Empdashboard/Dashboard';
     }
+
+    //save data
+    function attendancefunction() {
+        var formData = new FormData();
+        formData.append('desig_id', $('#desig_id').val());
+        formData.append('starttime', $('#starttime').val());
+        formData.append('endtime', $('#endtime').val());
+        formData.append('is_active', $('#is_active').val());
+        formData.append('status', $('#status').val());
+        formData.append('remarks', $('#remarks').val());
+
+        $.ajax({
+            type: 'POST',
+            url: '/Hrm/Attendance/Save',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                // Handle the success case, e.g., remove the deleted image from the table
+                $('#desig_id').val('');
+                $('#starttime').val('');
+                $('#endtime').val('');
+                $('#is_active').val('');
+                $('#status').val('');
+                $('#remarks').val('');
+
+                //window.location.href = '/Hrm/Employee/Show';
+            },
+            error: function () {
+
+            }
+
+        });
+    }
+
+
 </script>
 
 
