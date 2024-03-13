@@ -3,6 +3,7 @@ using Microsoft.Data.SqlClient;
 using System.Data;
 using Dapper;
 using static Infiniatask.Areas.Controllers.EmployeeController;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 namespace Infiniatask.Areas.Hrm.Repository
 {
     public class EmployeeRepository : dbcontext
@@ -62,6 +63,20 @@ namespace Infiniatask.Areas.Hrm.Repository
             {
                 return connection .Query<DropDownModel>(query,new DynamicParameters()).ToList();
             }
+        }
+
+        public static int delete(int id)
+        {
+            string query = "DELETE  FROM HRM_Employees WHERE desig_id = @id";
+            using (IDbConnection con = new SqlConnection(LoadConnectionString()))
+            {
+                return con.Execute(query, new
+                {
+                   id 
+                });
+            }
+
+
         }
 
 

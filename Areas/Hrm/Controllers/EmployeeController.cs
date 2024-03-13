@@ -48,7 +48,17 @@ namespace Infiniatask.Areas.Controllers
         }
 
 
-        
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            int result;
+            result = EmployeeRepository.delete(id);
+            //return Json(result);
+           
+            return Json(new { success = true, Message = "Delete Successfully!" });
+        }
+
+
 
 
 

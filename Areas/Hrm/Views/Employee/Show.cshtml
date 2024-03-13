@@ -58,6 +58,7 @@
             <th scope="col">Salary</th>
             <th scope="col">Status</th>
             <th scope="col">Address</th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -83,17 +84,43 @@
                     }
                 </td>
                 <td style="text-align:center">@ViewBag.employee[i].address</td>
-                @* <td style="text-align:center">
-                    <button class="btn btn-primary" onclick="EditClient(@ViewBag.getemployee[i].pk_client_id)">Edit</button>  <button class="btn btn-danger" onclick="deleteClient(@ViewBag.getclient[i].pk_client_id)">Delete</button>
-                </td> *@
+                <td style="text-align:center">
+                    <button type="button" class="btn btn-primary" onclick="EditClient(@ViewBag.employee[i].desig_id)">Edit</button>  <button class="btn btn-danger" onclick="deleteClient(@ViewBag.employee[i].desig_id)">Delete</button>
+                </td>
             </tr>
         }
     </tbody>
 </table>
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 <script>
     function backbutton() 
     {
         window.location.href = '/Hrm/Empdashboard/Dashboard';
+    }
+
+
+    //Deleted work
+    function deleteClient(desig_id) {
+        console.log(desig_id);
+        if (confirm("Are you sure you want to delete this entry?")) {
+            $.ajax({
+                url: '/Hrm/Employee/Delete/' + desig_id,
+                type: 'POST', // You can use 'DELETE' if your server supports it
+                success: function (result) {
+                    // Handle the success case, e.g., remove the deleted image from the table
+                   // Swal.close();
+
+                    if (result == true) {
+                        window.location.reload();
+                    }
+                    
+                }, 
+                error: function () {
+                   // swal.fire('Oops...', 'Something went wrong!', 'error');
+                }
+            });
+        }
     }
 </script>
