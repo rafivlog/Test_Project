@@ -96,13 +96,14 @@ namespace Infiniatask.Areas.Hrm.Repository
         public static int Update(EmployeeModel employee)
         {
             string response = string.Empty;
-            string query = "Update into HRM_Employees(empname,dtjoin,dtbirth,dept_id,desig_id,salary,emp_status,address,email,password) " +
-                "values (@empname,@dtjoin,@dtbirth,@dept_id,@desig_id,@salary,@emp_status,@address,@email,@password )";
+            string query = "Update  HRM_Employees SET  empname=@empname,dtjoin=@dtjoin,dtbirth=@dtbirth,dept_id=@dept_id,desig_id=@desig_id,salary=@salary,emp_status=@emp_status,address=@address,email=@email,password=@password WHERE hidden_id=@hidden_id";
+
+
             using (IDbConnection con = new SqlConnection(LoadConnectionString()))
             {
                 return con.Execute(query, new
                 {
-
+                    employee.hidden_id,
                     employee.empname,
                     employee.dtjoin,
                     employee.dtbirth,
@@ -117,6 +118,14 @@ namespace Infiniatask.Areas.Hrm.Repository
             }
 
 
+        }
+
+        //Auto data show on edit page 
+        public static EmployeeModel geteditdata(int desig_id)
+        {
+            string query = @"SELECT * FROM HRM_Employees WHERE desig_id = " + desig_id;
+            using IDbConnection con = new SqlConnection(LoadConnectionString());
+            return con.Query < EmployeeModel>(query, new DynamicParameters()).FirstOrDefault();
         }
 
 

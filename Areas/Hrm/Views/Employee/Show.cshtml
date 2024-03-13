@@ -87,7 +87,7 @@
                 @* use url link to go edit page , same as employee index page , because some complicated() issues   *@
                 <td style="text-align:center">
                    <button>
-                        <a href="@Url.Action("Edit","Employee",new {desig_id = @ViewBag.employee[i].desig_id})" title="Edit" class="btn btn-success">Edit</a><a href="@Url.Action("Edit","Employee",new {desig_id = @ViewBag.employee[i].desig_id})" title="Edit" class="btn btn-success">Edit</a>
+                        <a style="text-decoration:none ; color:black" href="@Url.Action("Edit","Employee",new {desig_id = @ViewBag.employee[i].desig_id})" class="btn btn-success">Edit</a>
                    </button> 
                     <button type="button" class="btn btn-danger" onclick="deleteClient(@ViewBag.employee[i].desig_id)">Delete</button>
                 </td>
@@ -131,79 +131,5 @@
 
 
     //Edited Work
-    function EditClient(desig_id) {
-        window.location.href = '/Hrm/Employee/Index';
-        $.ajax({
-            type: "GET",
-            url: "/Hrm/Employee/GetData/" + desig_id,
-            success: function (data) {
-                // Append the loaded content to the container
-                //$('#hidden_pk_client_id').val(data.pk_client_id);
-                console.log(data);
-                $('#name').val(data.empname);
-                $('#email').val(data.email);
-                $('#joindate').val(data.dtjoin);
-                $('#dateofbirth').val(data.dtbirth);
-                $('#departmentid').val(data.dept_id);
-                $('#designationid').val(data.desig_id);
-                $('#salary').val(data.salary);
-                $('#empstatus').val(data.emp_status);
-                $('#address').val(data.address);
-               
-
-                // Show the container
-                //$("#partialViewContainer").show();
-                $('#savebutton').attr('onclick', 'Update()')
-                //$('#clientModal').modal('show');
-            },
-            error: function (xhr, status, error) {
-
-                //swal.fire('Oops...', 'Something went wrong!', 'error');
-            }
-        });
-    }
-
-    // updated work
-    function Update() {
-
-        // Update logic
-        var formData = new FormData();
-        // Append data to the FormData object
-        formData.append('empname', $('#name').val());
-        formData.append('email', $('#email').val());
-        formData.append('dtjoin', $('#joindate').val());
-        formData.append('dtbirth', $('#dateofbirth').val());
-        formData.append('dept_id', $('#departmentid').val());
-        formData.append('desig_id', $('#designationid').val());
-        formData.append('salary', $('#salary').val());
-        formData.append('emp_status', $('#empstatus').val());
-        formData.append('address', $('#address').val());
-       
-        
-        $.ajax({
-            type: 'POST',
-            url: '/Hrm/Employee/UpdateClient',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function (result) {
-                //Swal.close();
-
-                if (result == true) {
-                        window.location.reload();
-                }
-                else {
-                    console.log('Failure block executed');
-                    alert('Failed to update entry. ' + result.errorMessage);
-                }
-            },
-
-            error: function () {
-                
-            }
-        });
-
-
-    }
-
+    
 </script>

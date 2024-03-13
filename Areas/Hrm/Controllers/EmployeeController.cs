@@ -81,10 +81,24 @@ namespace Infiniatask.Areas.Controllers
         [HttpGet("Employee/Edit/{desig_id}")]
         public ActionResult Edit(int desig_id)
         {
+            //data show on edit page .placeholder
+            EmployeeModel data = EmployeeRepository.geteditdata(desig_id);
 
 
             
-            return View();
+            return View(data);
+        }
+
+        //data edit kore save kortci abr
+
+        public ActionResult update(EmployeeModel data)
+        {
+            int result;
+            result = EmployeeRepository.Update(data);
+
+
+            return Json(result);
+
         }
 
 
