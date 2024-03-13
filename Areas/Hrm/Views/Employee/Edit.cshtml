@@ -5,35 +5,35 @@
     <title>Employee Information Form</title>
     <!-- You can link your custom stylesheets or include additional styling here -->
     <style>
-       /*  body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
+        /*  body {
+                    font-family: Arial, sans-serif;
+                    margin: 20px;
+                }
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
+                label {
+                    display: block;
+                    margin-bottom: 5px;
+                }
 
-        input, select {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-        }
+                input, select {
+                    width: 100%;
+                    padding: 8px;
+                    margin-bottom: 15px;
+                    box-sizing: border-box;
+                }
 
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+                button {
+                    background-color: #4CAF50;
+                    color: white;
+                    padding: 10px 15px;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                }
 
-        .address {
-            width: 30%;
-        } */
+                .address {
+                    width: 30%;
+                } */
 
 
         /* New Code */
@@ -58,7 +58,7 @@
         label {
             display: block;
             margin-bottom: 8px;
-            position:center;
+            position: center;
         }
 
         input, select {
@@ -70,15 +70,15 @@
             box-sizing: border-box;
         }
 
-        input[type="submit"] {
+            input[type="submit"] {
                 background-color: #4caf50;
                 color: #fff;
                 cursor: pointer;
-        }
+            }
 
-        input[type="submit"]:hover {
+                input[type="submit"]:hover {
                     background-color: #45a049;
-        }
+                }
 
         button {
             background-color: beige;
@@ -90,9 +90,9 @@
             cursor: pointer;
         }
 
-        button:hover {
+            button:hover {
                 background-color: #2980b9;
-        }
+            }
     </style>
 </head>
 <body>
@@ -126,7 +126,7 @@
 
         <label for="empStatus">Employee Status:</label>
         <select id="empstatus" name="empstatus" required>
-            <option   value="true">Active</option>
+            <option value="true">Active</option>
             <option value="false">Inactive</option>
         </select>
 
@@ -138,7 +138,7 @@
         <button type="button" id="savebutton" onclick="SubmitForm()">Submit</button>
 
 
-        
+
         <button type="button" id="saveloginbutton" onclick="Submitloginform()">Login</button>
 
 
@@ -147,62 +147,3 @@
 
 </body>
 </html>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script>
-    function SubmitForm(){
-        var formData = new FormData();
-        formData.append('empname', $('#name').val());
-        formData.append('email', $('#email').val());
-        formData.append('password', $('#password').val());
-        formData.append('dtjoin', $('#joindate').val());
-        formData.append('dtbirth', $('#dateofbirth').val());
-        formData.append('dept_id', $('#departmentid').val());
-        formData.append('desig_id', $('#designationid').val());
-        formData.append('salary', $('#salary').val());
-        formData.append('emp_status', $('#empstatus').val());
-        formData.append('address', $('#address').val());
-        
-        $.ajax({
-            type: 'POST',
-            url: '/Hrm/Employee/Save',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function (result) {
-                // Handle the success case, e.g., remove the deleted image from the table  
-                $('#name').val('');
-                $('#email').val('');
-                $('#password').val('');
-                $('#joindate').val('');
-                $('#dateofbirth').val('');
-                $('#departmentid').val('');
-                $('#designationid').val('');
-                $('#salary').val('');
-                $('#empstatus').val('');
-                $('#address').val('');
-                //window.location.href = '/Hrm/Employee/Show';
-            },
-            error: function () {
-
-            }
-            
-        });
-    }
-
-    function Submitloginform()
-    {
-            window.location.href = '/Hrm/Emplogin/Login';
-        
-    }
-</script>
-
-
-@* 1-> git add .
-    2-> git commit -m ""
-    3-> git push
-
-    My Bank Account Number   
-    First Security Islami Bank : 12600002862
-*@
-
-

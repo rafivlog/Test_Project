@@ -79,6 +79,46 @@ namespace Infiniatask.Areas.Hrm.Repository
 
         }
 
+        public static int edit(int id)
+        {
+            string query = "SELECT * FROM HRM_Employees WHERE desig_id = @id";
+            using (IDbConnection con = new SqlConnection(LoadConnectionString()))
+            {
+                return con.Execute(query, new
+                {
+                    id
+                });
+            }
+        }
+
+        //updated work
+
+        public static int Update(EmployeeModel employee)
+        {
+            string response = string.Empty;
+            string query = "Update into HRM_Employees(empname,dtjoin,dtbirth,dept_id,desig_id,salary,emp_status,address,email,password) " +
+                "values (@empname,@dtjoin,@dtbirth,@dept_id,@desig_id,@salary,@emp_status,@address,@email,@password )";
+            using (IDbConnection con = new SqlConnection(LoadConnectionString()))
+            {
+                return con.Execute(query, new
+                {
+
+                    employee.empname,
+                    employee.dtjoin,
+                    employee.dtbirth,
+                    employee.dept_id,
+                    employee.desig_id,
+                    employee.salary,
+                    employee.emp_status,
+                    employee.address,
+                    employee.email,
+                    employee.password
+                });
+            }
+
+
+        }
+
 
     }
 }

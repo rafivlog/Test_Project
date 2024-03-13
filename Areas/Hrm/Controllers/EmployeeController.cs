@@ -58,6 +58,35 @@ namespace Infiniatask.Areas.Controllers
             return Json(new { success = true, Message = "Delete Successfully!" });
         }
 
+        [HttpGet]
+        public ActionResult GetData(int id)
+        {
+            int result;
+            result = EmployeeRepository.edit(id);
+
+            return Json(new { success = true, Message = "Edited Successfully!" });
+        }
+
+        [HttpPost]
+        
+        public ActionResult UpdateClient(EmployeeModel data)
+        {
+            int result;
+            result = EmployeeRepository.Update(data);
+            return Json(result);
+        }
+
+
+        //Forcefully Get ID Number.
+        [HttpGet("Employee/Edit/{desig_id}")]
+        public ActionResult Edit(int desig_id)
+        {
+
+
+            
+            return View();
+        }
+
 
 
 
