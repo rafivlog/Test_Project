@@ -65,6 +65,8 @@ namespace Infiniatask.Areas.Hrm.Repository
             }
         }
 
+
+        //deleted work
         public static int delete(int id)
         {
             string query = "DELETE  FROM HRM_Employees WHERE desig_id = @id";
@@ -79,17 +81,7 @@ namespace Infiniatask.Areas.Hrm.Repository
 
         }
 
-       /* public static int edit(int id)
-        {
-            string query = "SELECT * FROM HRM_Employees WHERE desig_id = @id";
-            using (IDbConnection con = new SqlConnection(LoadConnectionString()))
-            {
-                return con.Execute(query, new
-                {
-                    id
-                });
-            }
-        }*/
+       
 
         //updated work
 

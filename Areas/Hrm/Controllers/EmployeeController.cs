@@ -58,23 +58,7 @@ namespace Infiniatask.Areas.Controllers
             return Json(new { success = true, Message = "Delete Successfully!" });
         }
 
-       /* [HttpGet]
-        public ActionResult GetData(int id)
-        {
-            int result;
-            result = EmployeeRepository.edit(id);
-
-            return Json(new { success = true, Message = "Edited Successfully!" });
-        }
-*/
-      /*  [HttpPost]
-        
-        public ActionResult UpdateClient(EmployeeModel data)
-        {
-            int result;
-            result = EmployeeRepository.Update(data);
-            return Json(result);
-        }*/
+      
 
 
         //Forcefully Get ID Number. // Edit eta hcce View page tay viewbag use kory nai same page er mddhey data Model er maddhome pathacci 
