@@ -14,6 +14,7 @@ namespace Infiniatask.Areas.Hrm.Repository
         }
 
         //ekhane data save kortci db te 
+        //Saving data here to the database
         public static int Create(EmployeeModel employee)
         {
             string response = string.Empty;
@@ -42,6 +43,7 @@ namespace Infiniatask.Areas.Hrm.Repository
 
 
         //ekhane load use kore save kora data sthe sthe dekhayci 
+        //Here, data is loaded and saved at the same time to display
         public static List<EmployeeModel> getemployee()
         {
             string response = string.Empty;
@@ -54,7 +56,7 @@ namespace Infiniatask.Areas.Hrm.Repository
 
 
         //Attendance er jnne dropdown er jnne collect kortci .
-
+        //Collecting data for the dropdown for attendance.
         public static IEnumerable<DropDownModel> GetDropDownData()
         {
             string query = "SELECT id as id , CONCAT(desig_id , ' | ',empname  ) as dd_value FROM HRM_Employees";
@@ -112,7 +114,8 @@ namespace Infiniatask.Areas.Hrm.Repository
 
         }
 
-        //Auto data show on edit page 
+        //edit page e db theke data ene show korano hcce ekhane 
+        //Data needs to be fetched from the database and displayed here on the edit page
         public static EmployeeModel geteditdata(int desig_id)
         {
             string query = @"SELECT * FROM HRM_Employees WHERE desig_id = " + desig_id;

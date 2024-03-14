@@ -39,7 +39,9 @@ namespace Infiniatask.Areas.Controllers
         }
 
         [HttpGet]
-/*        ekhane attendace from er dropdown er jnne employee theke data nicci */        
+        /*        ekhane attendace from er dropdown er jnne employee theke data nicci .
+                  Here, data is being fetched from the employees for the dropdown of the attendance form."
+         */
         public IActionResult GetDropdownData()
         {
 
@@ -74,6 +76,7 @@ namespace Infiniatask.Areas.Controllers
         }
 
         //data edit kore save kortci abr
+        //Editing data and then saving again
 
         [HttpPost]
         public ActionResult update(EmployeeModel data)
