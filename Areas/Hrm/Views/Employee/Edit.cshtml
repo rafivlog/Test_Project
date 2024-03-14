@@ -101,6 +101,8 @@
     <h2>Employee Information Form</h2>
 
     <form>
+
+        <input id="id" value="@Model.id" hidden>
         <label for="name">Name:</label>
         <input type="text" id="name" name="name"  value="@Model.empname">
 
@@ -153,7 +155,8 @@
 <script>
     function SubmitForm() {
         var formData = new FormData();
-        formData.append('hidden_id', $('#hidden_id').val());
+        console.log(formData);
+        formData.append('id', $('#id').val());
         formData.append('empname', $('#name').val());
         formData.append('email', $('#email').val());
         formData.append('password', $('#password').val());
@@ -173,6 +176,8 @@
             processData: false,
             success: function (result) {
                 // Handle the success case, e.g., remove the deleted image from the table
+                //$('#hidden_id').val('');
+                $('#id').val('');
                 $('#name').val('');
                 $('#email').val('');
                 $('#password').val('');

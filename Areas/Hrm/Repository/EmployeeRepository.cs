@@ -79,7 +79,7 @@ namespace Infiniatask.Areas.Hrm.Repository
 
         }
 
-        public static int edit(int id)
+       /* public static int edit(int id)
         {
             string query = "SELECT * FROM HRM_Employees WHERE desig_id = @id";
             using (IDbConnection con = new SqlConnection(LoadConnectionString()))
@@ -89,21 +89,21 @@ namespace Infiniatask.Areas.Hrm.Repository
                     id
                 });
             }
-        }
+        }*/
 
         //updated work
 
         public static int Update(EmployeeModel employee)
         {
             string response = string.Empty;
-            string query = "Update  HRM_Employees SET  empname=@empname,dtjoin=@dtjoin,dtbirth=@dtbirth,dept_id=@dept_id,desig_id=@desig_id,salary=@salary,emp_status=@emp_status,address=@address,email=@email,password=@password WHERE hidden_id=@hidden_id";
+            string query = "Update  HRM_Employees SET  empname=@empname,dtjoin=@dtjoin,dtbirth=@dtbirth,dept_id=@dept_id,desig_id=@desig_id,salary=@salary,emp_status=@emp_status,address=@address,email=@email,password=@password WHERE id=@id";
 
 
             using (IDbConnection con = new SqlConnection(LoadConnectionString()))
             {
                 return con.Execute(query, new
                 {
-                    employee.hidden_id,
+                    employee.id,
                     employee.empname,
                     employee.dtjoin,
                     employee.dtbirth,
@@ -125,7 +125,7 @@ namespace Infiniatask.Areas.Hrm.Repository
         {
             string query = @"SELECT * FROM HRM_Employees WHERE desig_id = " + desig_id;
             using IDbConnection con = new SqlConnection(LoadConnectionString());
-            return con.Query < EmployeeModel>(query, new DynamicParameters()).FirstOrDefault();
+            return con.Query <EmployeeModel>(query, new DynamicParameters()).FirstOrDefault();
         }
 
 

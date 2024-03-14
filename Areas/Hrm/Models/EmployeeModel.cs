@@ -15,7 +15,8 @@
         public string address { get; set; }
         public string email { get; set; }
         public string password { get; set; }
-        public int hidden_id { get; set; }
+
+        public int id { get; set; }
     }
 }
 
