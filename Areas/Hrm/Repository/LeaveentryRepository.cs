@@ -29,6 +29,7 @@ namespace Infiniatask.Areas.Hrm.Repository
                     employee.totaldays,
                     employee.remarks,
                     
+                     
                 });
             }
 

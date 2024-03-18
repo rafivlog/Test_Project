@@ -6,6 +6,7 @@
         table {
             border-collapse: collapse;
             width: 100%;
+        background-color: darkcyan;
             
         }
 
@@ -117,7 +118,7 @@
                     // Handle the success case, e.g., remove the deleted image from the table
                    // Swal.close();
 
-                    if (result >0) {
+                    if (result != null) {
                         window.location.reload();
                     }
                     

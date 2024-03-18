@@ -31,7 +31,7 @@ namespace Infiniatask.Areas.Hrm.Repository
                     employee.dept_id,
                     employee.desig_id,
                     employee.salary,
-                    employee.emp_status,
+                    employee.emp_status,  
                     employee.address,
                     employee.email,
                     employee.password
@@ -72,9 +72,9 @@ namespace Infiniatask.Areas.Hrm.Repository
         public static int delete(int id)
         {
             string query = "DELETE  FROM HRM_Employees WHERE desig_id = @id";
-            using (IDbConnection con = new SqlConnection(LoadConnectionString()))
+            using (IDbConnection con = new SqlConnection(LoadConnectionString())) 
             {
-                return con.Execute(query, new
+                return con.Execute(query, new 
                 {
                    id 
                 });
@@ -122,6 +122,8 @@ namespace Infiniatask.Areas.Hrm.Repository
             using IDbConnection con = new SqlConnection(LoadConnectionString());
             return con.Query <EmployeeModel>(query, new DynamicParameters()).FirstOrDefault();
         }
+
+
 
 
     }

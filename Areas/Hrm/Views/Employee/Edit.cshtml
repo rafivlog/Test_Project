@@ -41,7 +41,7 @@
 
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: darkcyan;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -71,15 +71,15 @@
             box-sizing: border-box;
         }
 
-            input[type="submit"] {
+        input[type="submit"] {
                 background-color: #4caf50;
                 color: #fff;
                 cursor: pointer;
-            }
+        }
 
-                input[type="submit"]:hover {
-                    background-color: #45a049;
-                }
+        input[type="submit"]:hover {
+                background-color: #45a049;
+        }
 
         button {
             background-color: beige;
@@ -91,9 +91,9 @@
             cursor: pointer;
         }
 
-            button:hover {
-                background-color: #2980b9;
-            }
+        button:hover {
+            background-color: #2980b9;
+        }
     </style>
 </head>
 <body>
@@ -152,6 +152,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
+
 <script>
     function Editform() {
         var formData = new FormData();
@@ -181,7 +182,7 @@
                 $('#name').val('');
                 $('#email').val('');
                 $('#password').val('');
-                $('#joindate').val('');
+                $('#joindate').val(''); 
                 $('#dateofbirth').val('');
                 $('#departmentid').val('');
                 $('#designationid').val('');
