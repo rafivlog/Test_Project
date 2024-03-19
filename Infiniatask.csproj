@@ -8,10 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Hrm\Data\" />
-    <Folder Include="Areas\Stock\Controllers\" />
     <Folder Include="Areas\Stock\Data\" />
-    <Folder Include="Areas\Stock\Models\" />
-    <Folder Include="Areas\Stock\Views\" />
     <Folder Include="Controllers\" />
   </ItemGroup>
 

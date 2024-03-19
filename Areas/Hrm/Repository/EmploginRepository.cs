@@ -12,7 +12,7 @@ namespace Infiniatask.Areas.Hrm.Repository
             return Getconnection();
         }
 
-        public static int match(EmploginModel employee)
+        public static int match(EmploginModel employee) 
         {
             using (IDbConnection con = new SqlConnection(LoadConnectionString()))
             {

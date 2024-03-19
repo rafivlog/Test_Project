@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a New Item</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Create a New Item</h2>
+        <form>
+            <div class="form-group">
+                <label for="category">Category:</label>
+                <select id="category" name="category">
+                    <option value="category1">Category 1</option>
+                    <option value="category2">Category 2</option>
+                    <option value="category3">Category 3</option>
+                    <!-- Add more options as needed -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="itemName">Item Name:</label>
+                <input type="text" id="itemName" name="itemName" placeholder="Enter item name">
+            </div>
+            <div class="form-group">
+                <label for="itemPrice">Item Price:</label>
+                <input type="text" id="itemPrice" name="itemPrice" placeholder="Enter item price">
+            </div>
+            <div class="form-group">
+                <label for="itemQuantity">Item Quantity:</label>
+                <input type="text" id="itemQuantity" name="itemQuantity" placeholder="Enter item quantity">
+            </div>
+            <div class="form-group">
+                <label for="itemLocation">Item Location:</label>
+                <input type="text" id="itemLocation" name="itemLocation" placeholder="Enter item location">
+            </div>
+            <input type="submit" value="Save">
+        </form>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category Input Field</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+                background-color: #0056b3;
+        }
+
+        h2{
+            margin-left : 41%;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff; /* Default button color */
+            color: #fff; /* Default text color */
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+                background-color: #0056b3; /* Button color on hover */
+        }
+        
+
+        /* table css */
+        body {
+            font-family: Arial, sans-serif;
+            background-color : darkcyan;
+        }
+         
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 2px solid black;
+            text-align: center;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <form>
+            <div class="form-group">
+                <input id="stk_id" hidden>
+                <input id="InsertAT" hidden>
+                <label for="category">Category:</label>
+                <input type="text" id="catname" name="catname" placeholder="Enter category">
+            </div>
+            <input class="btn" type="button" value="Save" onclick="Submitcategory()">
+            <input class="btn" type="button" value="AddItem" onclick="Additemfunction()">
+        </form>
+    </div>
+
+    <h2>Show All Category</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Category Name</th>
+                <th>InsertAT</th>
+                <th>Edit/Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < ViewBag.category.Count; i++)
+            {
+                <tr>
+                    <td style="text-align:center">@(i + 1)</td>
+                    <td style="text-align:center">@ViewBag.category[i].catname</td>
+                    <td style="text-align:center">@ViewBag.category[i].InsertAT</td>
+                    <td>
+                        <button type="button" class=" btn-danger">Edit</button>
+                        <button type="button" class=" btn-danger">Delete</button>
+                    </td>
+
+
+                    @* use url link to go edit page , same as employee index page , because some complicated() issues   *@
+                    @* <td style="text-align:center">
+                <button>
+                <a style="text-decoration:none ; color:black" href="@Url.Action("Edit","Employee",new {desig_id = @ViewBag.employee[i].desig_id})" class="btn btn-success">Edit</a>
+                </button>
+                <button type="button" class="btn btn-danger" onclick="deleteClient(@ViewBag.employee[i].desig_id)">Delete</button>
+                </td> *@
+                </tr>
+            }    
+        </tbody>
+    </table>
+</body>
+</html>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $('#catname').keypress(function (e) {
+        if (e.which === 13) {
+            Submitcategory();
+        }
+    });
+
+    function Additemfunction() {
+        window.location.href = '/Stock/Item/Additem';
+    }
+
+
+    function Submitcategory() {
+        var formData = new FormData();
+        formData.append('catname', $('#catname').val());
+        formData.append('stk_id', $('#stk_id').val());
+        formData.append('InsertAT', $('#InsertAT').val());
+       
+        $.ajax({
+            type: 'POST',
+            url: '/Stock/Category/Save',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                // Handle the success case, e.g., remove the deleted image from the table
+                $('#catname').val('');
+                $('#stk_id').val('');
+                $('#InsertAT').val('');
+
+                if (result != null) {
+                    window.location.reload();
+                }
+               
+                //window.location.href = '/Hrm/Employee/Show';
+            },
+            error: function () {
+
+            }
+
+        });
+    }
+
+    
+</script>
