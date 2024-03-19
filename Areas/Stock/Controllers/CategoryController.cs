@@ -25,16 +25,18 @@ namespace Infiniatask.Areas.Stock.Controllers
 
             int result;
             result = CategoryRepository.Create(data);
-
-
-
-           
-
-
             return Json(result);
 
 
         }
+
+        public IActionResult GetDropdownData()
+        {
+
+            IEnumerable<dropdownModel> data = CategoryRepository.GetDropDownData();
+            return Json(data);
+        }
+
 
         /*public IActionResult Show()
         {

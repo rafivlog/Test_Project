@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Standard Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border: 1px solid #ddd; /* Add border for table */
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Sr</th>
+                <th>Item Name</th>
+                <th>Item Price</th>
+                <th>Quantity</th>
+                <th>Item Location</th>
+                <th>Edit/Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(int i=0;i<ViewBag.item.Count ; i++)
+            {
+                <tr>
+                    <td style="text-align:center">@(i + 1)</td>
+                    <td style="text-align:center">@ViewBag.item[i].item_name</td>
+                    <td style="text-align:center">@ViewBag.item[i].item_price</td>
+                    <td style="text-align:center">@ViewBag.item[i].qty</td>
+                    <td style="text-align:center">@ViewBag.item[i].item_location</td>
+                    <td>
+                        <button type="button" class=" btn-danger">Edit</button>
+                        <button type="button" class=" btn-danger">Delete</button>
+                    </td>
+                </tr>
+               
+
+            }
+        </tbody>
+    </table>
+
+</body>
+</html>

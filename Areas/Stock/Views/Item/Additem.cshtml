@@ -51,6 +51,20 @@
             background-color: #0056b3;
         }
 
+
+        button {
+            background-color: #2980b9;
+            color: black;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: green;
+            }
         
     </style>
 </head>
@@ -61,32 +75,97 @@
         <form>
             <div class="form-group">
                 <label for="category">Category:</label>
-                <select id="category" name="category">
-                    <option value="category1">Category 1</option>
-                    <option value="category2">Category 2</option>
-                    <option value="category3">Category 3</option>
-                    <!-- Add more options as needed -->
+                <select id="cat_id" name="cat_id">
+                   
                 </select>
             </div>
             <div class="form-group">
                 <label for="itemName">Item Name:</label>
-                <input type="text" id="itemName" name="itemName" placeholder="Enter item name">
+                <input type="text" id="item_name" name="item_name" placeholder="Enter item name">
             </div>
             <div class="form-group">
                 <label for="itemPrice">Item Price:</label>
-                <input type="text" id="itemPrice" name="itemPrice" placeholder="Enter item price">
+                <input type="number" id="item_price" name="item_price" placeholder="Enter item price">
             </div>
             <div class="form-group">
                 <label for="itemQuantity">Item Quantity:</label>
-                <input type="text" id="itemQuantity" name="itemQuantity" placeholder="Enter item quantity">
+                <input type="text" id="qty" name="qty" placeholder="Enter item quantity">
             </div>
             <div class="form-group">
                 <label for="itemLocation">Item Location:</label>
-                <input type="text" id="itemLocation" name="itemLocation" placeholder="Enter item location">
+                <input type="text" id="item_location" name="item_location" placeholder="Enter item location">
             </div>
-            <input type="submit" value="Save">
+            @* <input  type="button" onclick="additemfunction()" value="Save"> *@
+            <button id="savebutton" onclick="additemfunction()" type="button">Save</button>
         </form>
     </div>
 
 </body>
 </html>
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+<script>
+    //dropdown work
+    $(function () {
+        debugger
+        $.ajax({
+            url: '/Stock/Category/GetDropdownData',
+            type: 'GET',
+
+            success: function (data) {
+                console.log(data);
+                var dropdown = $('#cat_id');// dropdown #ID field name
+                dropdown.empty();
+
+                var selectoption = $('<option>').text('--select--').val('');
+                dropdown.append(selectoption);
+
+                $.each(data, function (index, group) {
+
+                    var option = $('<option>').text(group.dd_value);
+
+                    dropdown.append(option);// dd_value -> collect to the employee table , using query
+
+                });
+
+            },
+
+        });
+    });
+
+    function additemfunction() {
+        var formData = new FormData();
+        formData.append('item_name', $('#item_name').val());
+        formData.append('item_price', $('#item_price').val());
+        formData.append('qty', $('#qty').val());
+        formData.append('item_location', $('#item_location').val());
+       
+
+        $.ajax({
+            type: 'POST',
+            url: '/Stock/Item/Save',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                // Handle the success case, e.g., remove the deleted image from the table
+                $('#item_name').val('');
+                $('#item_price').val('');
+                $('#qty').val('');
+                $('#item_location').val('');
+                $('#cat_id').val('');
+
+               
+                //kaj kora Baky *****************************************
+                window.location.href = '/Stock/Item/Itemlist';
+            },
+            error: function () {
+
+            }
+
+        });
+    }
+</script>
