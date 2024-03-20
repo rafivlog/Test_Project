@@ -1,0 +1,27 @@
+﻿using Infiniatask.Areas.Stock.Models;
+using Infiniatask.Areas.Stock.Repository;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Infiniatask.Areas.Stock.Controllers
+{
+    [Area("Stock")]
+    public class DistributedController : Controller
+    {
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Distitem() 
+        {
+            return View();
+        }
+
+        public IActionResult GetItemDropdownData(int id)
+        {
+
+            IEnumerable<itemdropdownModel> data = DistributedRepository.GetDropDownData(id);
+            return Json(data);
+        }
+    }
+}

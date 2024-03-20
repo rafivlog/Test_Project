@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distribution Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        select, input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+            input[type="date"] {
+                padding: 8px 5px;
+            }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+            button:hover {
+                background-color: #45a049;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Distribution Form</h2>
+        <form>
+            <div>
+                <label for="employeeName">Employee Name:</label>
+                <select id="desig_id" name="desig_id">
+
+                </select>
+            </div>
+            <div>
+                <label for="category">Category:</label>
+                <select id="cat_id" name="cat_id" onchange="catitemlist()">
+
+                </select>
+            </div>
+            <div>
+                <label for="item">Item Name & Item Quantity:</label>
+                <select id="item_id" name="item_id">
+                    
+                </select>
+            </div>
+            <div>
+                <label for="distributedQuantity">Distributed Quantity:</label>
+                <input type="number" id="qty" name="qty" min="1">
+            </div>
+            <div>
+                <label for="dateOfDistribution">Date of Distribution:</label>
+                <input type="date" id="distributed_date" name="distributed_date">
+            </div>
+            <div>
+                <label for="remarks">Remarks:</label>
+                <textarea id="remarks" name="remarks" rows="4" fixed></textarea>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+</body>
+</html>
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    //Get Employee Name & ID
+    $(function () {
+        debugger
+        $.ajax({
+            url: '/Hrm/Employee/GetDropdownData',
+            type: 'GET',
+
+            success: function (data) {
+                //console.log(data);
+                var dropdown = $('#desig_id');// dropdown #ID field name
+                dropdown.empty();
+
+                var selectoption = $('<option>').text('--select--').val('');
+                dropdown.append(selectoption);
+
+                $.each(data, function (index, group) {
+
+                    var option = $('<option>').text(group.dd_value).val(group.id);
+
+                    dropdown.append(option);// dd_value -> collect to the employee table , using query
+
+                });
+
+            },
+
+        });
+    });
+
+    //get category name
+    $(function () {
+        debugger
+        $.ajax({
+            url: '/Stock/Category/GetDropdownData',
+            type: 'GET',
+
+            success: function (data) {
+                //console.log(data);
+                var dropdown = $('#cat_id');// dropdown #ID field name
+                dropdown.empty();
+
+                var selectoption = $('<option>').text('--select--').val('');
+                dropdown.append(selectoption);
+
+                $.each(data, function (index, group) {
+
+                    var option = $('<option>').text(group.dd_value).val(group.id);
+
+                    dropdown.append(option);// dd_value -> collect to the employee table , using query
+
+                });
+
+            },
+
+        });
+    });
+
+    function catitemlist() {
+            debugger
+var cat_id = $('#cat_id').val();
+        console.log(cat_id);
+        debugger
+        $.ajax({
+            url: '/Stock/Distributed/GetItemDropdownData/' + cat_id,
+            type: 'GET',
+
+            success: function (data) {
+                //console.log(data);
+                var dropdown = $('#item_id');// dropdown #ID field name
+                dropdown.empty();
+
+                var selectoption = $('<option>').text('-Item Name-&-Quantity-').val('');
+                dropdown.append(selectoption);
+
+                $.each(data, function (index, group) {
+
+
+                    var option = $('<option>').text(group.dd_value).val(group.id);
+
+                    dropdown.append(option);// dd_value -> collect to the employee table , using query
+
+                });
+
+            },
+
+        });
+
+    }
+</script>

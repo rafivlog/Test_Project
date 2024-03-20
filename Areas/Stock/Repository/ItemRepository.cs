@@ -16,13 +16,13 @@ namespace Infiniatask.Areas.Stock.Repository
         public static int Create(ItemModel item)
         {
             string response = string.Empty;
-            string query = "Insert into STK_Stock(item_name,item_price,qty,item_location) " +
-                "values (@item_name,@item_price,@qty,@item_location)";
+            string query = "Insert into STK_Stock(cat_id,item_name,item_price,qty,item_location) " +
+                "values (@cat_id,@item_name,@item_price,@qty,@item_location)";
             using (IDbConnection con = new SqlConnection(LoadConnectionString()))
             {
                 return con.Execute(query, new
                 {
-
+                    item.cat_id,
                     item.item_name,
                     item.item_price,
                     item.qty,

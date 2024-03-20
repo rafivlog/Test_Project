@@ -48,7 +48,7 @@ namespace Infiniatask.Areas.Stock.Repository
 
         public static IEnumerable<dropdownModel> GetDropDownData()
         {
-            string query = "SELECT catname as dd_value FROM STK_Category";
+            string query = "SELECT  cat_id as id, catname as dd_value FROM STK_Category";
 
             using (IDbConnection connection = new SqlConnection(LoadConnectionString()))
             {

@@ -116,7 +116,7 @@
             type: 'GET',
 
             success: function (data) {
-                console.log(data);
+                
                 var dropdown = $('#cat_id');// dropdown #ID field name
                 dropdown.empty();
 
@@ -125,7 +125,7 @@
 
                 $.each(data, function (index, group) {
 
-                    var option = $('<option>').text(group.dd_value);
+                    var option = $('<option>').text(group.dd_value).val(group.id);
 
                     dropdown.append(option);// dd_value -> collect to the employee table , using query
 
@@ -137,12 +137,16 @@
     });
 
     function additemfunction() {
+        var catd = $('#cat_id').val();
         var formData = new FormData();
+        formData.append('catd', $('#cat_id').val());
         formData.append('item_name', $('#item_name').val());
+        formData.append('cat_id', $('#cat_id').val());
+        console.log(catd);
         formData.append('item_price', $('#item_price').val());
         formData.append('qty', $('#qty').val());
         formData.append('item_location', $('#item_location').val());
-       
+       debugger
 
         $.ajax({
             type: 'POST',
