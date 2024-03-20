@@ -89,7 +89,7 @@
                 <label for="remarks">Remarks:</label>
                 <textarea id="remarks" name="remarks" rows="4" fixed></textarea>
             </div>
-            <button type="submit">Submit</button>
+            <button type="button" onclick="addDistributedfunction()">Submit</button>
         </form>
     </div>
 
@@ -99,7 +99,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-    //Get Employee Name & ID
+    //Get Employee Name & ID ******** DropDown 1 ***********
     $(function () {
         debugger
         $.ajax({
@@ -127,7 +127,7 @@
         });
     });
 
-    //get category name
+    //get category name ******** DropDown 2 ***********
     $(function () {
         debugger
         $.ajax({
@@ -155,11 +155,10 @@
         });
     });
 
-    function catitemlist() {
-            debugger
-var cat_id = $('#cat_id').val();
+    //get Itenm & Quantity With Fixed Category  ******** DropDown 3 ***********
+    function catitemlist() { 
+        var cat_id = $('#cat_id').val();
         console.log(cat_id);
-        debugger
         $.ajax({
             url: '/Stock/Distributed/GetItemDropdownData/' + cat_id,
             type: 'GET',
@@ -185,5 +184,40 @@ var cat_id = $('#cat_id').val();
 
         });
 
+    }
+
+    //data save
+    function addDistributedfunction() {
+        var formData = new FormData();
+        formData.append('qty', $('#qty').val());
+        formData.append('distributed_date', $('#distributed_date').val());
+        formData.append('remarks', $('#remarks').val());
+       
+
+        $.ajax({
+            type: 'POST',
+            url: '/Stock/Distributed/Save',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                // Handle the success case, e.g., remove the deleted image from the table
+                $('#qty').val('');
+                $('#distributed_date').val('');
+                $('#remarks').val('');
+                //hcce na clear dekha lagbe .####$$$$$$#############$$$$$$$$
+                $('#desig_id').empty(); 
+                $('#cat_id').empty();   
+                $('#item_id').empty();  
+
+
+                //pore deya lagbe koi jabe .
+                //window.location.href = '/Stock/Item/Itemlist';
+            },
+            error: function () {
+
+            }
+
+        });
     }
 </script>

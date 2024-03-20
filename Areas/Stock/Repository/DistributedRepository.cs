@@ -20,5 +20,23 @@ namespace Infiniatask.Areas.Stock.Repository
 
             return con.Query<itemdropdownModel>(query, new { cat_id });
         }
+        
+        public static int Create(DistributedModel item)
+        {
+            string response = string.Empty;
+            string query = "Insert into STK_Distributed(qty,distributed_date,remarks) " +
+                "values (@qty,@distributed_date,@remarks)";
+            using (IDbConnection con = new SqlConnection(LoadConnectionString()))
+            {
+                return con.Execute(query, new
+                {
+                    item.qty,
+                    item.distributed_date,
+                    item.remarks,
+                });
+            }
+
+
+        }
     }
 }
