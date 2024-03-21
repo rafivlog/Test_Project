@@ -6,9 +6,9 @@
     table {
         width: 85%;
         border-collapse: separate;
-        border-spacing: 0 10px; /* Adjust the spacing between rows as needed */
+        border-spacing: 10px 10px; /* Adjust the spacing between rows as needed */
         margin-left: 7%;
-        margin-top: 3%; 
+        margin-top: -1%; 
     }
 
     th, td {
@@ -20,6 +20,11 @@
     th {
         background-color: #f2f2f2;
     }
+
+    td:hover {
+        background-color: lightblue;
+    }
+
 
 
 /*     ager code  */
@@ -35,18 +40,23 @@
         border-radius: 8px; /* Rounded corners */
         transition: background-color 0.3s, color 0.3s;
         position:relative;
-       /*  margin-left:50%;
-        margin-bottom:25px; */
+        margin-left:90%;
+        margin-bottom:25px;
+    }
+    h1{
+        margin-left: 39%;
+        margin-top:-1%;
     }
 </style>
 
 <div>
-    <h1>All Employee List</h1>
+    
     <button class="large-button" type="button" onclick="backbutton()">Back</button>
 </div>
 
 
 <table class="table table-striped">
+    <h1>All Employee List</h1>
     <thead>
         <tr>
             <th scope="col">Sr</th>
@@ -59,7 +69,7 @@
             <th scope="col">Salary</th>
             <th scope="col">Status</th>
             <th scope="col">Address</th>
-            <th scope="col"></th>
+            <th scope="col">Edit/Delete</th>
         </tr>
     </thead>
     <tbody>
