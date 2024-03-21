@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Infiniatask.Areas.Hrm.Models;
 using Infiniatask.Areas.Stock.Models;
 using Microsoft.Data.SqlClient;
 using System.Data;
@@ -24,19 +25,33 @@ namespace Infiniatask.Areas.Stock.Repository
         public static int Create(DistributedModel item)
         {
             string response = string.Empty;
-            string query = "Insert into STK_Distributed(qty,distributed_date,remarks) " +
-                "values (@qty,@distributed_date,@remarks)";
+            string query = "Insert into STK_Distributed(id,cat_id,stk_id,qty,distributed_date,remarks) " +
+                "values (@id,@cat_id,@stk_id,@qty,@distributed_date,@remarks)";
             using (IDbConnection con = new SqlConnection(LoadConnectionString()))
             {
                 return con.Execute(query, new
                 {
+                    item.id,
+                    item.cat_id,
+                    item.stk_id,
                     item.qty,
                     item.distributed_date,
                     item.remarks,
                 });
             }
 
+        }
+
+        public static List<DistributedModel> getdistributed()
+        {
+            string response = string.Empty;
+            string query = "SELECT  (SELECT empname FROM HRM_Employees WHERE id = STK_Distributed.id) AS empname, (SELECT catname FROM STK_Category WHERE cat_id = STK_Distributed.cat_id) AS catname, (SELECT item_name FROM STK_Stock WHERE stk_id = STK_Distributed.stk_id) AS item_name, qty, distributed_date FROM   STK_Distributed;";
+            using IDbConnection con = new SqlConnection(LoadConnectionString());
+            return con.Query<DistributedModel>(query, new DynamicParameters()).ToList();
+
 
         }
+
+       
     }
 }

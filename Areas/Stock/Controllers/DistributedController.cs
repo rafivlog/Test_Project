@@ -1,4 +1,6 @@
-﻿using Infiniatask.Areas.Stock.Models;
+﻿using Infiniatask.Areas.Hrm.Models;
+using Infiniatask.Areas.Hrm.Repository;
+using Infiniatask.Areas.Stock.Models;
 using Infiniatask.Areas.Stock.Repository;
 using Microsoft.AspNetCore.Mvc;
 
@@ -34,6 +36,15 @@ namespace Infiniatask.Areas.Stock.Controllers
             return Json(result);
 
 
+        }
+
+        public IActionResult Show()
+        {
+            List<DistributedModel> distlist = DistributedRepository.getdistributed();
+
+
+            ViewBag.dist = distlist;
+            return View();
         }
     }
 }

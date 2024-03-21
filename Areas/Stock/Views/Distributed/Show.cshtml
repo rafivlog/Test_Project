@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Table</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #ddd;
+            width: 150px; /* Set the width of each cell */
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Sr</th>
+                <th>Employee Name</th>
+                <th>Category Name</th>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Invoice Date</th>
+                <th>Edit/Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < ViewBag.dist.Count; i++)
+            {
+                <tr>
+                    <td style="text-align:center">@(i + 1)</td>
+                    <td style="text-align:center">@ViewBag.dist[i].empname</td>
+                    <td style="text-align:center">@ViewBag.dist[i].catname</td>
+                    <td style="text-align:center">@ViewBag.dist[i].item_name</td>
+                    <td style="text-align:center">@ViewBag.dist[i].qty</td>
+                    <td style="text-align:center">@ViewBag.dist[i].distributed_date</td>
+                    <td>
+                        <button type="button" class=" btn-danger">Edit</button>
+                        <button type="button" class=" btn-danger">Delete</button>
+                    </td>
+                </tr>
+
+
+            }
+        </tbody>
+    </table>
+</body>
+</html>

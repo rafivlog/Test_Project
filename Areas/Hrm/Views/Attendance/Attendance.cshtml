@@ -80,7 +80,7 @@
     <div class="attendance-form">
         
         <form>
-            <label for="desig_id">Designation ID:</label>
+            <label for="desig_id">Employee ID & Name:</label>
             <select id="desig_id" name="desig_id">
                 
             </select>
@@ -134,7 +134,7 @@
                 var dropdown = $('#desig_id');// dropdown #ID field name
                 dropdown.empty();
 
-                var  selectoption = $('<option>').text('--select--').val('');
+                var  selectoption = $('<option>').text('ID | Name').val('');
                 dropdown.append(selectoption);
 
                 $.each(data, function (index, group) {

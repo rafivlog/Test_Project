@@ -61,7 +61,7 @@
         <form>
             <div>
                 <label for="employeeName">Employee Name:</label>
-                <select id="desig_id" name="desig_id">
+                <select id="id" name="id">
 
                 </select>
             </div>
@@ -73,7 +73,7 @@
             </div>
             <div>
                 <label for="item">Item Name & Item Quantity:</label>
-                <select id="item_id" name="item_id">
+                <select id="stockid" name="stockid">
                     
                 </select>
             </div>
@@ -108,7 +108,7 @@
 
             success: function (data) {
                 //console.log(data);
-                var dropdown = $('#desig_id');// dropdown #ID field name
+                var dropdown = $('#id');// dropdown #ID field name
                 dropdown.empty();
 
                 var selectoption = $('<option>').text('--select--').val('');
@@ -158,14 +158,14 @@
     //get Itenm & Quantity With Fixed Category  ******** DropDown 3 ***********
     function catitemlist() { 
         var cat_id = $('#cat_id').val();
-        console.log(cat_id);
+        //console.log(cat_id);
         $.ajax({
             url: '/Stock/Distributed/GetItemDropdownData/' + cat_id,
             type: 'GET',
 
             success: function (data) {
                 //console.log(data);
-                var dropdown = $('#item_id');// dropdown #ID field name
+                var dropdown = $('#stockid');// dropdown #ID field name
                 dropdown.empty();
 
                 var selectoption = $('<option>').text('-Item Name-&-Quantity-').val('');
@@ -188,7 +188,16 @@
 
     //data save
     function addDistributedfunction() {
+        var id = $('#id').val();
+        var cat_id = $('#cat_id').val();
+        var stk_id = $('#stockid').val();
+        console.log(stockid);
+        debugger
         var formData = new FormData();
+        // model same ->> HTML ID
+        formData.append('id', $('#id').val());
+        formData.append('cat_id', $('#cat_id').val());
+        formData.append('stk_id', $('#stockid').val());
         formData.append('qty', $('#qty').val());
         formData.append('distributed_date', $('#distributed_date').val());
         formData.append('remarks', $('#remarks').val());
@@ -205,14 +214,17 @@
                 $('#qty').val('');
                 $('#distributed_date').val('');
                 $('#remarks').val('');
+                $('#id').val('');
+                $('#cat_id').val('');
+                $('#stockid').val('');
                 //hcce na clear dekha lagbe .####$$$$$$#############$$$$$$$$
-                $('#desig_id').empty(); 
-                $('#cat_id').empty();   
-                $('#item_id').empty();  
+                
+                
+
 
 
                 //pore deya lagbe koi jabe .
-                //window.location.href = '/Stock/Item/Itemlist';
+                window.location.href = '/Stock/Distributed/Show';
             },
             error: function () {
 
