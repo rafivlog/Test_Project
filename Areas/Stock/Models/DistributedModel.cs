@@ -23,7 +23,8 @@ namespace Infiniatask.Areas.Stock.Models
 
         public string item_name { get; set; }
 
-       
+
+
 
 
     }

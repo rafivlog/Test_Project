@@ -46,5 +46,13 @@ namespace Infiniatask.Areas.Stock.Controllers
             ViewBag.dist = distlist;
             return View();
         }
+
+        // extra kaam krtci hbe kina jnina 
+        /*public IActionResult qtychanges(int stockid)
+        {
+            List<DistributedModel> changesqty = DistributedRepository.saveqtychanges(stockid);
+            return Json(changesqty);
+
+        }*/
     }
 }

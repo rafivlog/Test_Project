@@ -25,8 +25,10 @@ namespace Infiniatask.Areas.Stock.Repository
         public static int Create(DistributedModel item)
         {
             string response = string.Empty;
-            string query = "Insert into STK_Distributed(id,cat_id,stk_id,qty,distributed_date,remarks) " +
-                "values (@id,@cat_id,@stk_id,@qty,@distributed_date,@remarks)";
+            /*string query = "Insert into STK_Distributed(id,cat_id,stk_id,qty,distributed_date,remarks) " +
+                "values (@id,@cat_id,@stk_id,@qty,@distributed_date,@remarks)";*/
+            string query = "BEGIN TRANSACTION;DECLARE @qty_stock INT, @qty_distributed INT;SELECT @qty_stock = qty FROM STK_Stock WHERE stk_id = @stk_id;SELECT @qty_distributed = qty FROM STK_Distributed WHERE stk_id = @stk_id;INSERT INTO STK_Distributed (id, cat_id, stk_id, qty, distributed_date, remarks)VALUES (@id, @cat_id, @stk_id, @qty, @distributed_date, @remarks); " +
+                "UPDATE STK_Stock SET qty = ((SELECT COALESCE(qty, 0) FROM STK_Stock WHERE stk_id = @stk_id) -  (SELECT COALESCE(SUM(qty), 0) FROM STK_Distributed WHERE stk_id = @stk_id)) WHERE stk_id = @stk_id;COMMIT;";
             using (IDbConnection con = new SqlConnection(LoadConnectionString()))
             {
                 return con.Execute(query, new
@@ -52,6 +54,9 @@ namespace Infiniatask.Areas.Stock.Repository
 
         }
 
-       
+        
+
+
+
     }
 }
