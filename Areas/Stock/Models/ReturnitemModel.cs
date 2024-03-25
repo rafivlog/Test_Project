@@ -10,6 +10,8 @@
 
         public int qty { get; set; }
 
+        public int return_qty { get; set; }
+
         public DateTime returning_date { get; set; }
 
         public string remarks { get; set; }

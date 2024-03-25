@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Distribution Form</title>
+    <title>Return Item Form</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -226,6 +226,55 @@
                 
 
             },
+
+        });
+    }
+
+    //submit Return FormData
+    function addReturnItemfunction() {
+        var id = $('#id').val();
+        var cat_id = $('#cat_id').val();
+        var stk_id = $('#stockid').val();
+        //console.log(stockid);
+        debugger
+        var formData = new FormData();
+        // model same ->> HTML ID
+        formData.append('id', $('#id').val());
+        formData.append('cat_id', $('#cat_id').val());
+        formData.append('stk_id', $('#stockid').val());
+        formData.append('qty', $('#qty').val());
+        formData.append('return_qty', $('#return_qty').val());
+        formData.append('returning_date', $('#returning_date').val());
+        formData.append('remarks', $('#remarks').val());
+
+
+        $.ajax({
+            type: 'POST',
+            url: '/Stock/Returnitem/Save',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                // Handle the success case, e.g., remove the deleted image from the table
+                $('#qty').val('');
+                $('#returning_date').val('');
+                $('#return_qty').val('');
+                $('#remarks').val('');
+                $('#id').val('');
+                $('#cat_id').val('');
+                $('#stockid').val('');
+                //hcce na clear dekha lagbe .####$$$$$$#############$$$$$$$$
+
+
+
+
+
+                //pore deya lagbe koi jabe .
+                //window.location.href = '/Stock/Distributed/Show';
+            },
+            error: function () {
+
+            }
 
         });
     }
