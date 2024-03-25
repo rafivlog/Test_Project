@@ -6,6 +6,7 @@
         public string dd_value { get; set; }
 
         public int cat_id {  get; set; }
+        public int stk_id {  get; set; }
 
 
     }

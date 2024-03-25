@@ -13,10 +13,10 @@ namespace Infiniatask.Areas.Stock.Repository
             return Getconnection();
         }
 
+        // id , stk_id extra add korci 17 & 24 line.
         public static IEnumerable<itemdropdownModel> GetDropDownData(int cat_id)
         {
             string query = "SELECT stk_id as id, CONCAT(item_name, ' | ', qty) as dd_value FROM STK_Stock WHERE cat_id = @cat_id";
-
             using IDbConnection con = new SqlConnection(LoadConnectionString());
 
             return con.Query<itemdropdownModel>(query, new { cat_id });

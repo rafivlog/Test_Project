@@ -57,39 +57,42 @@
 <body>
 
     <div class="container">
-        <h2>Distribution Form</h2>
+        <h2>Return Items</h2>
         <form>
             <div>
                 <label for="employeeName">Employee Name:</label>
                 <select id="id" name="id">
-
                 </select>
             </div>
             <div>
                 <label for="category">Category:</label>
                 <select id="cat_id" name="cat_id" onchange="catitemlist()">
-
                 </select>
             </div>
             <div>
                 <label for="item">Item Name & Item Quantity:</label>
-                <select id="stockid" name="stockid">
-                    
+                <select id="stockid" name="stockid" onchange="itemlist()">
                 </select>
             </div>
             <div>
-                <label for="distributedQuantity">Distributed Quantity:</label>
+                <label for="distributedQuantity">Specified Quantity:</label>
                 <input type="number" id="qty" name="qty" min="1">
             </div>
+
             <div>
-                <label for="dateOfDistribution">Date of Distribution:</label>
-                <input type="date" id="distributed_date" name="distributed_date">
+                <label for="distributedQuantity">Returned Quantity:</label>
+                <input type="number" id="return_qty" name="return_qty" min="1">
+            </div>
+
+            <div>
+                <label for="dateOfDistribution">Date of Returning:</label>
+                <input type="date" id="returning_date" name="returning_date">
             </div>
             <div>
                 <label for="remarks">Remarks:</label>
                 <textarea id="remarks" name="remarks" rows="4" fixed></textarea>
             </div>
-            <button type="button" onclick="addDistributedfunction()">Submit</button>
+            <button type="button" onclick="addReturnItemfunction()">Submit</button>
         </form>
     </div>
 
@@ -98,8 +101,9 @@
 
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 <script>
-    //Get Employee Name & ID ******** DropDown 1 ***********
+    
     $(function () {
         debugger
         $.ajax({
@@ -131,7 +135,7 @@
     $(function () {
         debugger
         $.ajax({
-            url: '/Stock/Category/GetDropdownData',
+            url: '/Stock/Category/GetDropdownData/',
             type: 'GET',
 
             success: function (data) {
@@ -155,22 +159,23 @@
         });
     });
 
-    //get Itenm & Quantity With Fixed Category  ******** DropDown 3 ***********
+    ///*************/
+
     function catitemlist() {
-       // var id = $('#id').val();
-       // var cat_id = $('#cat_id').val();
-       // var stk_id = $('#stockid').val();
         var cat_id = $('#cat_id').val();
         //console.log(cat_id);
         $.ajax({
             url: '/Stock/Distributed/GetItemDropdownData/' + cat_id,
-            //url: '/Stock/Distributed/GetItemDropdownData/' + id & cat_id & stk_id,
             type: 'GET',
 
             success: function (data) {
                 //console.log(data);
                 var dropdown = $('#stockid');// dropdown #ID field name
                 dropdown.empty();
+
+                $('#qty').val('qty');
+
+
 
                 var selectoption = $('<option>').text('-Item Name-&-Quantity-').val('');
                 dropdown.append(selectoption);
@@ -190,53 +195,44 @@
 
     }
 
-    //data save
-    function addDistributedfunction() {
-        var id = $('#id').val();
-        var cat_id = $('#cat_id').val();
-        var stk_id = $('#stockid').val();
-        console.log(stockid);
-        debugger
-        var formData = new FormData();
-        // model same ->> HTML ID
-        formData.append('id', $('#id').val());
-        formData.append('cat_id', $('#cat_id').val());
-        formData.append('stk_id', $('#stockid').val());
-        formData.append('qty', $('#qty').val());
-        formData.append('distributed_date', $('#distributed_date').val());
-        formData.append('remarks', $('#remarks').val());
-       
 
+    // extra avalaible dekhanor jnne krtci *********************************
+
+    function itemlist() {
+        var aidi = $('#id').val();
+        var cataidi = $('#cat_id').val();
+        var stockaidi = $('#stockid').val();
+        //console.log(aidi);
+
+        const retparameterModel = {
+            aidi: aidi,
+            cataidi: cataidi,
+            stockaidi: stockaidi
+        };
+        //console.log(retparameterModel);
         $.ajax({
-            type: 'POST',
-            url: '/Stock/Distributed/Save',
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function (result) {
-                // Handle the success case, e.g., remove the deleted image from the table
-                $('#qty').val('');
-                $('#distributed_date').val('');
-                $('#remarks').val('');
-                $('#id').val('');
-                $('#cat_id').val('');
-                $('#stockid').val('');
-                //hcce na clear dekha lagbe .####$$$$$$#############$$$$$$$$
-                
+            //url: '/Stock/Returnitem/Getquantity/' + id & cat_id & stk_id ,
+            //url : '/Stock/Returnitem/Getquantity?' + new URLSearchParams(params),
+            //type: 'GET',
+            url: '/Stock/Returnitem/Getquantity',
+            type: 'GET',
+            data: jQuery.param(retparameterModel),
+
+            success: function (data) {
+                //console.log(data);
+                $('#qty').val(data);
+
+                //console.log(data);
                 
 
-
-
-                //pore deya lagbe koi jabe .
-                window.location.href = '/Stock/Distributed/Show';
             },
-            error: function () {
-
-            }
 
         });
-
-        //extra kaam kortci hbe kina jnina 
-       
     }
+
+
+    
 </script>
+
+
+                

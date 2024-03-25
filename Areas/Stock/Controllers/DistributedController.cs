@@ -25,6 +25,14 @@ namespace Infiniatask.Areas.Stock.Controllers
             IEnumerable<itemdropdownModel> data = DistributedRepository.GetDropDownData(id);
             return Json(data);
         }
+        /* public IActionResult GetItemDropdownData(int a,int b, int c)
+         {
+
+             IEnumerable<itemdropdownModel> data = DistributedRepository.GetDropDownData(a,b,c);
+             return Json(data);
+         }*/
+
+
 
         public IActionResult Save(DistributedModel data)
         {
