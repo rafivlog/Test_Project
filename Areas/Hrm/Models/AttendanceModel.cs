@@ -3,7 +3,9 @@
     public class AttendanceModel
     {
         public string name { get; set; }
+
         public int desig_id { get; set; }
+
         public DateTime starttime { get; set; }
         public DateTime endtime { get; set; }
         public bool is_active { get; set; }

@@ -257,3 +257,21 @@
         public string dd_value { get; set; }
      
 *@
+
+
+
+
+ @*      CREATE PROCEDURE attaforma
+as
+BEGIN
+    SELECT e.empname , e.desig_id, a.starttime , a.endtime , a.status
+    FROM HRM_Employees AS e , HRM_Attendance AS a
+    Where e.id = a.desig_id;
+END
+
+exec attaforma 
+
+SSRS REPORT COUNT ( STATUS) 
+->>>  **  =Count(IIF(Fields!status.Value = "present", 1, Nothing))  **
+
+*@
