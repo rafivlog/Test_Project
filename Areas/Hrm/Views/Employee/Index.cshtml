@@ -118,6 +118,9 @@
         <label for="departmentId">Department ID:</label>
         <input type="number" id="departmentid" name="departmentid" required>
 
+        <label for="departmentname">Department Name:</label>
+        <input type="text" id="departmentname" name="departmentname" required>
+
         <label for="designationId">Designation ID:</label>
         <input type="number" id="designationid" name="designationid" required>
 
@@ -157,6 +160,7 @@
         formData.append('dtjoin', $('#joindate').val());
         formData.append('dtbirth', $('#dateofbirth').val());
         formData.append('dept_id', $('#departmentid').val());
+        formData.append('dept_name', $('#departmentname').val());
         formData.append('desig_id', $('#designationid').val());
         formData.append('salary', $('#salary').val());
         formData.append('emp_status', $('#empstatus').val());
@@ -176,6 +180,7 @@
                 $('#joindate').val('');
                 $('#dateofbirth').val('');
                 $('#departmentid').val('');
+                $('#departmentname').val('');
                 $('#designationid').val('');
                 $('#salary').val('');
                 $('#empstatus').val('');

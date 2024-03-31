@@ -18,8 +18,8 @@ namespace Infiniatask.Areas.Hrm.Repository
         public static int Create(EmployeeModel employee)
         {
             string response = string.Empty;
-            string query = "Insert into HRM_Employees(empname,dtjoin,dtbirth,dept_id,desig_id,salary,emp_status,address,email,password) " +
-                "values (@empname,@dtjoin,@dtbirth,@dept_id,@desig_id,@salary,@emp_status,@address,@email,@password )";
+            string query = "Insert into HRM_Employees(empname,dtjoin,dtbirth,dept_id,dept_name,desig_id,salary,emp_status,address,email,password) " +
+                "values (@empname,@dtjoin,@dtbirth,@dept_id,@dept_name,@desig_id,@salary,@emp_status,@address,@email,@password )";
             using (IDbConnection con = new SqlConnection(LoadConnectionString()))
             {
                 return con.Execute(query, new
@@ -29,6 +29,7 @@ namespace Infiniatask.Areas.Hrm.Repository
                     employee.dtjoin,
                     employee.dtbirth,
                     employee.dept_id,
+                    employee.dept_name,
                     employee.desig_id,
                     employee.salary,
                     employee.emp_status,  
@@ -47,7 +48,7 @@ namespace Infiniatask.Areas.Hrm.Repository
         public static List<EmployeeModel> getemployee()
         {
             string response = string.Empty;
-            string query = "Select empname,dtbirth,dept_id,desig_id,salary,emp_status,address,email from HRM_Employees";
+            string query = "Select empname,dtbirth,dept_id,dept_name,desig_id,salary,emp_status,address,email from HRM_Employees";
             using IDbConnection con = new SqlConnection(LoadConnectionString());
             return con.Query<EmployeeModel>(query, new DynamicParameters()).ToList();
             
@@ -90,7 +91,7 @@ namespace Infiniatask.Areas.Hrm.Repository
         public static int Update(EmployeeModel employee)
         {
             string response = string.Empty;
-            string query = "Update  HRM_Employees SET  empname=@empname,dtjoin=@dtjoin,dtbirth=@dtbirth,dept_id=@dept_id,desig_id=@desig_id,salary=@salary,emp_status=@emp_status,address=@address,email=@email,password=@password WHERE id=@id";
+            string query = "Update  HRM_Employees SET  empname=@empname,dtjoin=@dtjoin,dtbirth=@dtbirth,dept_id=@dept_id,dept_name=@dept_name,desig_id=@desig_id,salary=@salary,emp_status=@emp_status,address=@address,email=@email,password=@password WHERE id=@id";
 
 
             using (IDbConnection con = new SqlConnection(LoadConnectionString()))
@@ -102,6 +103,7 @@ namespace Infiniatask.Areas.Hrm.Repository
                     employee.dtjoin,
                     employee.dtbirth,
                     employee.dept_id,
+                    employee.dept_name,
                     employee.desig_id,
                     employee.salary,
                     employee.emp_status,
