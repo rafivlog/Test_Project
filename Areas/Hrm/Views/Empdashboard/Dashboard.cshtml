@@ -67,6 +67,7 @@
     <button class="large-button" type="button" onclick="emplist()">Employee List</button>
     <button class="large-button" onclick="leaveentry()" type="button">Leave Entry</button>
     <button class="large-button" onclick="attendance()" type="button">Attendance</button>
+    <button class="large-button" onclick="allreport()" type="button">All Report</button>
     <div type="button" class="logout-container">
         <button type="button" onclick="logout()" class="logout-button">Logout</button>
     </div>
@@ -92,6 +93,10 @@
     }
     function attendance() {
         window.location.href = '/Hrm/Attendance/Attendance';
+    }
+    function allreport()
+    {
+        window.location.href = '/Hrm/Allreport/LoadReport';
     }
 
 </script>

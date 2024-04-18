@@ -46,17 +46,20 @@
     h1{
         margin-left: 39%;
         margin-top:-1%;
+        color: blue;
+        text-decoration: underline;
     }
 </style>
 
 <div>
     
-    <button class="large-button" type="button" onclick="backbutton()">Back</button>
+    <button  type="button" class="large-button" type="button" onclick="backbutton()">Back</button>
+    <button class="large-button" type="button" onclick="ssrsreport()">Report</button>
 </div>
 
 
 <table class="table table-striped">
-    <h1>All Employee List</h1>
+    <h1 onclick="gotoexport()">Export Employee List</h1>
     <thead>
         <tr>
             <th scope="col">Sr</th>
@@ -103,7 +106,7 @@
                         <a style="text-decoration:none ; color:black" href="@Url.Action("Edit","Employee",new {desig_id = @ViewBag.employee[i].desig_id})" class="btn btn-success">Edit</a>
                    </button> 
                     <button type="button" class="btn btn-danger" onclick="deleteClient(@ViewBag.employee[i].desig_id)">Delete</button>
-                </td>
+                </td> 
             </tr>
         }
     </tbody>
@@ -115,6 +118,10 @@
     function backbutton() 
     {
         window.location.href = '/Hrm/Empdashboard/Dashboard';
+    }
+
+    function ssrsreport() {
+        window.location.href = '/Hrm/Employee/GetReport';
     }
 
 

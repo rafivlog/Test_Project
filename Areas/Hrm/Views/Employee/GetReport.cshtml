@@ -1,0 +1,105 @@
+﻿@* <label for="searchmonth">Search month:</label>
+<input type="text" id="searchmonth" name="searchmonth" required>
+
+<button type="button" class="btn btn-danger" onclick="gnrt()">Generate</button> *@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Month Dropdown</title>
+    @* <link rel="stylesheet" href="styles.css"> *@
+    <style>
+        .searchmonth {
+            width: 200px; /* Set the width of the dropdown */
+            padding: 8px; /* Add some padding inside the dropdown */
+            border: 2px solid #007BFF; /* Add a blue border */
+            border-radius: 4px; /* Rounded corners for the dropdown */
+            font-size: 16px; /* Increase font size for better readability */
+            background-color: #FFFFFF; /* Set a white background */
+            color: #333333; /* Set the text color to dark grey */
+            cursor: pointer; /* Change cursor to pointer to indicate it's selectable */
+        }
+
+            .searchmonth:hover {
+                border-color: #0056b3; /* Darken border when hovered */
+            }
+
+            .searchmonth:focus {
+                outline: none; /* Remove default focus outline */
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a blue glow when focused */
+            }
+
+        .btn {
+            background: linear-gradient(to bottom, #ff8c00 0%, #ff6500 100%); /* Orange gradient background */
+            border: none; /* No border for a modern look */
+            color: white; /* White text color for contrast */
+            padding: 10px 20px; /* Padding for better touch interaction */
+            font-size: 16px; /* Font size for readability */
+            font-weight: bold; /* Bold font weight for emphasis */
+            text-transform: uppercase; /* Uppercase text for a formal appearance */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Cursor indicates button is clickable */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for 3D effect */
+            transition: all 0.3s ease; /* Smooth transition for hover effects */
+        }
+
+            .btn:hover, .btn:focus {
+                background: linear-gradient(to bottom, #ff6500 0%, #ff8c00 100%); /* Invert gradient on hover/focus */
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Larger shadow on hover for depth */
+                outline: none; /* Remove outline, though ensure accessibility via other means if required */
+            }
+
+            .btn:active {
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Smaller shadow to simulate button press */
+                transform: translateY(2px); /* Slight move down to simulate button press */
+            }
+
+
+    </style>
+</head>
+<body>
+    <select name="searchmonth" id="searchmonth" class="searchmonth">
+        <option selected >Select</option>
+        <option value="January">January</option>
+        <option value="February">February</option>
+        <option value="March">March</option>
+        <option value="April">April</option>
+        <option value="May">May</option>
+        <option value="June">June</option>
+        <option value="July">July</option>
+        <option value="August">August</option>
+        <option value="September">September</option>
+        <option value="October">October</option>
+        <option value="November">November</option>
+        <option value="December">December</option>
+    </select>
+    <button type="button" class="btn" onclick="gnrt()">Generate</button>
+</body>
+</html>
+
+   
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    function gnrt() {
+
+        var search = $('#searchmonth').val();
+
+
+        $.ajax({
+            url: '/HRM/Employee/reports',
+            method: 'POST',
+            data: { search: search },
+            success: function (data) {
+
+                var url = "/Hrm/SSRS/LoadReport";
+                window.open(url, '_blank');
+            },
+            error: function (xhr, status, error) {
+                // Handle error
+                console.log(xhr.responseText);
+            }
+        });
+    }
+</script>

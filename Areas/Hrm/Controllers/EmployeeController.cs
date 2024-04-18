@@ -3,6 +3,7 @@ using Infiniatask.Areas.Hrm.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.JSInterop.Implementation;
+using Newtonsoft.Json;
 
 namespace Infiniatask.Areas.Controllers
 {
@@ -87,6 +88,27 @@ namespace Infiniatask.Areas.Controllers
 
             return Json(result);
 
+        }
+
+
+        // new work for SSRS report add
+
+        public IActionResult GetReport()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult reports(string search)
+        {
+            ReportParam report = new ReportParam();
+            report.rptKey = "searchMonth";
+            report.rptPath = "/searchMonth";
+            report.rptTitle = "searchMonth";
+            report.rptFormat = "PDF";
+            report.rptDate = search;
+            string hrmsreport = JsonConvert.SerializeObject(report);
+            HttpContext.Response.Cookies.Append("hrmsreport", hrmsreport);
+            return Content("<script>window.open('/SSRS/LoadReport', '_blank');</script>", "text/html");
         }
 
 

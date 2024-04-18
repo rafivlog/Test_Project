@@ -80,10 +80,14 @@
     <div class="attendance-form">
         
         <form>
+
             <label for="desig_id">Employee ID & Name:</label>
-            <select id="desig_id" name="desig_id">
-                
-            </select>
+               
+             <select id="desig_id" name="desig_id">
+
+              </select>
+            @* Extra kaj korar try krtci  *@
+          
 
             <label for="starttime">Start Time:</label>
             <input type="time" id="starttime" name="starttime" required>
@@ -130,7 +134,7 @@
             type: 'GET',
             
             success: function (data) {
-                console.log(data);
+                //console.log(data);
                 var dropdown = $('#desig_id');// dropdown #ID field name
                 dropdown.empty();
 
@@ -138,6 +142,7 @@
                 dropdown.append(selectoption);
 
                 $.each(data, function (index, group) {
+                    
 
                     var option = $('<option>').text(group.dd_value).val(group.id);
 
@@ -148,6 +153,14 @@
             },
             
         });
+
+       
+
+        // extra kaj
+
+        
+
+        
     });
 
 
